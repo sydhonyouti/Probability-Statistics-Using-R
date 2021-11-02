@@ -1,0 +1,119 @@
+# Sydney Honyouti
+
+# Problem 1: Use the data in Example 8.5.4, comprising a sample of
+#n = 10 lactic acid measurements in cheese. Assume, as we
+#did there, that the lactic acid measurements are a random
+#sample from the normal distribution with unknown mean
+#mu and unknown variance sigma^2. Wish to test H0: mu <= 1.2 and H1: mu > 1.2
+
+#a) Perform the level a0 = .05 test of these hypotheses
+acidData <- c(.86,1.53,1.57,1.81,.99,1.09,1.29,1.78,1.29,1.58)
+t.test(acidData,mu=1.2)
+
+#b) compute the p-value
+p <- .1181/2 
+p
+
+# Problem 2:
+x <- seq(-5,5, length=100)
+df <- 9
+
+color = "red"
+plot(x,dnorm(x), type="l",lty = 2, xlab = "t-value", ylab = "Density", 
+     main = "Comparison of t-distributions", col = "black")
+
+lines(x, dt(x, df), col = color)
+
+# Problem 3: 
+carData <- c(15.6,18.6,18.3,20.1,21.5,18.4,19.1,20.4,19.0)
+
+Xn <- mean(carData)
+signma <- sd(carData)
+
+t.test(carData,mu=20)
+
+carData <- c(15.6,18.6,18.3,20.1,21.5,18.4,19.1,20.4,19.0, 19.0)
+
+Xn <- mean(carData)
+signma <- sd(carData)
+
+t.test(carData,mu=20)
+
+# Problem 4:
+
+drugA <- c(1.23,1.42,1.41,1.62,1.55,1.51,1.60,1.76)
+drugB <- c(1.76,1.41,1.87,1.49,1.67,1.81)
+
+var.test(drugA,drugB)
+
+t.test(drugA,drugB,var.equal = TRUE)
+
+# part 2 doing problem 3)
+# Find the number c
+xMean <- mean(drugA)
+yMean <- mean(drugB)
+
+xSD <-sd(drugA)
+ySD <-sd(drugB)
+
+var.test(drugA,drugB)
+
+t.test(drugA,drugB,var.equal = TRUE)
+
+#T(1-level of significance/2) = c
+
+c <- 1 - .10/2
+c
+# Table in the back of the book tells us that with T(.95) with 12 degrees of 
+# freedom = to 1.782
+
+# Problem 5:
+calcium <-c(7,-4,18,17,-3,-5,1,10,11,-2)
+placebo <-c(-1,12,-1,-3,3,-5,5,2,-11,-1,-3)
+
+var.test(calcium,placebo)
+
+t.test(calcium,placebo,var.equal = TRUE,alternative = "greater")
+
+# Table in the back of the book tells us that with T(.95) with 12 degrees of 
+# freedom = to 1.782
+
+# Problem 6:
+group43Mean <- 8.56
+group43SD <- 2745.7
+
+group35Mean <- 5.551
+group35SD <- 783.9
+
+# U <- (((43 + 35 - 2)^1/2) (group43Mean + group35Mean)) / (((1/43+1/35)^1/2)((group43SD + group35SD)^1/2))
+# U = 1.939
+
+# Table in the back of the book tells us the range that with T(.99) with 76 degrees of 
+# freedom = to 2.376 
+
+# Problem 7:
+calcium <-c(7,-4,18,17,-3,-5,1,10,11,-2)
+placebo <-c(-1,12,-1,-3,3,-5,5,2,-11,-1,-3)
+
+var.test(calcium,placebo)
+
+# Problem 8: Use R to sketch several examples of the F distribution on the same graph.
+f <- rf(1000, 24, 24)  
+
+hist(f,breaks=50,prob=TRUE,col='cyan'
+     ,main="Histogram of F dist. with 24/24 deg. freedom")  
+
+# compare this histogram to the actual pdf
+nput <- seq(0,5,.01)
+oput <- df(nput,24,24)
+lines(nput,oput,col='firebrick',lwd='3')
+
+# Problem 9:Use R to design an experiment using the following premise.  First generate 10 random numbers 
+#from the standard normal distribution.  Second, carry out a hypothesis test with at the 𝐻0:𝜇0 = 0 
+#0.1 level of significance.  Repeat this 100 times and tabulate the results of the 100 tests.
+
+# Problem 10:Use the data set mtcars which comes with the base package of R.  Gather the following data sets 
+#and store them in vectors: mpg for 8 cylinder cars, mpg for 6 cylinder cars, and mpg for 4 cylinder
+#cars.  Conduct two sample hypotheses tests for differences in the mean for all possible pairs
+#paying careful attention to the assumption about equal variances.  Summarize your findings.
+
